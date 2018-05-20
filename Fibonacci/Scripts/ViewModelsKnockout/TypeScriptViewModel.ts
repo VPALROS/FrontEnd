@@ -19,13 +19,10 @@ function TypeScriptViewModel() {
     function _updateCurrentPrice(response) {
         if (!response) return;
         var newValue = response.bpi["EUR"].rate_float.toString();
-        console.log('updating current value', newValue);
-
         self.price(newValue);
     }
 
-    function _getCurrencyValue() {
-        console.log('getting server value');
+    function _getCurrencyValue() {      
         $.ajax({
             type: "GET",
             crossDomain: true,
@@ -34,18 +31,7 @@ function TypeScriptViewModel() {
             success: _updateCurrentPrice
         });
 
-        //const endpoint = 'http://api.coindesk.com/v1/bpi/currentprice.json';
-        //return this.http
-        //    .get(endpoint)//, {search: searchParams})
-        //    .map(res => res.json().main)
-        //    .subscribe(res => {
-        //        _updateCurrentPrice
-        //    });
     };
-
-   
-
-
 
     /**
      * Observable parameters
@@ -54,9 +40,7 @@ function TypeScriptViewModel() {
     self.price = ko.observable(localStorage.getItem('lastPrice') || '0');
     self.difference = ko.pureComputed(function () {
         var currentPrice = self.price();
-        console.log('currentPrice', currentPrice);
         var lastPrice = localStorage.getItem('lastPrice');
-        console.log('lastPrice', lastPrice);
         var change = _calculateDifference(currentPrice, lastPrice);
         return change.toFixed(5);
     });
@@ -65,13 +49,10 @@ function TypeScriptViewModel() {
         var lastPrice = parseFloat(localStorage.getItem('lastPrice'));
         var percentage = difference * 100 / lastPrice;
         localStorage.setItem('lastPrice', self.price());
-        console.log('percentage', difference);
         return `${percentage.toFixed(5)}%`;
     });
     self.icon = ko.pureComputed(function () {
         var difference = self.difference();
-        console.log('change', difference);
-
         return difference == 0 ? 'equal' : (difference > 0 ? 'up' : 'down');
     });
 

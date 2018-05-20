@@ -1,13 +1,9 @@
 ﻿var viewModel = function () {
-    this.number = ko.observable(0);
-    this.func = function () {
-        var list = FibonacciList(this.number());
-        this.result(JSON.stringify(list));
-    };
-    this.result = ko.observable("");
-    this.resetClicks = function () {
-        this.result("");
-    };
-
-}
+    var self = this;
+    self.inputNumber = ko.observable(0);
+    self.result = ko.pureComputed(function () {
+        var list = FibonacciList(self.inputNumber());
+        return JSON.stringify(list);
+    });
+};
 ko.applyBindings(viewModel);
