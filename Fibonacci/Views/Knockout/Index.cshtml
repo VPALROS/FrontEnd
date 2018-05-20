@@ -1,0 +1,34 @@
+﻿
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+}
+@Scripts.Render("~/bundles/knockout")
+
+@Scripts.Render("~/bundles/owner")
+<h2>Exercise 2 (JavaScript + Knockout)</h2>
+<div class="row col-sm-12">
+    <div class="form-group col-sm-5">
+        <div>
+            <label for="number">Fibonacci´s sequence for a Number:</label>
+            <input data-bind="value:number, event: {focusout: func} ,click: resetClicks" type="number" class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-7">
+    </div>
+</div>
+
+<div class="row col-sm-12">
+    <div class="form-group col-sm-5">
+        <div>
+            <label>Result:</label>
+            <textarea data-bind="text:result" type="text" class="form-control" readonly></textarea>
+        </div>
+    </div>
+    <div class="col-sm-7">
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/ViewModelsKnockout")
+

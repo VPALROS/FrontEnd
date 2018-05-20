@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Scripts.Render("~/bundles/owner")
+<h2>Exercise 1 (JavaScript)</h2>
+<div class="row col-sm-12">
+    <div class="form-group col-sm-5">
+        <div>
+            <label for="number">Fibonacci´s sequence for a Number:</label>
+            <input type="number" class="form-control" id="fibonacciNumber" onblur="clean()">
+        </div>
+    </div>
+    <div class="col-sm-7">
+    </div>
+</div>
+<div class="row col-sm-12">
+    <div class="form-group col-sm-5">
+        <button type="button" class="btn btn-primary" onclick="calculate()">Calculate</button>
+    </div>
+</div>
+<div class="row col-sm-12">
+    <div class="form-group col-sm-5">
+        <div>
+            <label>Result:</label>
+            <textarea type="text" class="form-control" id="result" readonly></textarea>
+        </div>
+    </div>
+    <div class="col-sm-7">
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    console.log('a');
+    var calculate = function () {
+        var number = document.getElementById('fibonacciNumber').value;
+        var list = FibonacciList(number);
+        document.getElementById('result').value = JSON.stringify(list);
+    }
+
+    var clean = function () {
+        document.getElementById('result').value = "";
+    }
+
+
+</script>
+
